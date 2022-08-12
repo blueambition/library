@@ -72,3 +72,23 @@ func Get(reqUrl, proxy string, header map[string]string) ([]byte, int, error) {
 	}
 	return nil, resp.StatusCode, errors.New("请求有误")
 }
+
+//Post请求
+func PostForm(reqUrl string, postData map[string][]string) ([]byte, int, error) {
+	client := &http.Client{}
+	//post请求
+	resp, err := client.PostForm(reqUrl, postData)
+	if err != nil {
+		return nil, 404, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode == 200 {
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			return nil, resp.StatusCode, err
+		}
+		return body, resp.StatusCode, nil
+	}
+
+	return nil, resp.StatusCode, errors.New("请求有误")
+}
