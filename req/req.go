@@ -1,7 +1,6 @@
 package req
 
 import (
-	"errors"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -30,14 +29,11 @@ func Post(reqUrl string, proxy string, header map[string]string, data string) ([
 		return nil, 0, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == 200 {
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return nil, resp.StatusCode, err
-		}
-		return body, resp.StatusCode, nil
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, resp.StatusCode, err
 	}
-	return nil, resp.StatusCode, errors.New("请求有误")
+	return body, resp.StatusCode, nil
 }
 
 //Get请求
@@ -63,14 +59,11 @@ func Get(reqUrl, proxy string, header map[string]string) ([]byte, int, error) {
 		return nil, 0, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == 200 {
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return nil, resp.StatusCode, err
-		}
-		return body, resp.StatusCode, nil
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, resp.StatusCode, err
 	}
-	return nil, resp.StatusCode, errors.New("请求有误")
+	return body, resp.StatusCode, nil
 }
 
 //Post请求
@@ -82,13 +75,9 @@ func PostForm(reqUrl string, postData map[string][]string) ([]byte, int, error) 
 		return nil, 404, err
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode == 200 {
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			return nil, resp.StatusCode, err
-		}
-		return body, resp.StatusCode, nil
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, resp.StatusCode, err
 	}
-
-	return nil, resp.StatusCode, errors.New("请求有误")
+	return body, resp.StatusCode, nil
 }
