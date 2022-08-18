@@ -4,6 +4,15 @@ import (
 	"time"
 )
 
+//转换成ISO时间 （ok交易所有用到）
+func ISOTime() string {
+	utcTime := time.Now().UTC()
+	iso := utcTime.String()
+	isoBytes := []byte(iso)
+	iso = string(isoBytes[:10]) + "T" + string(isoBytes[11:23]) + "Z"
+	return iso
+}
+
 // 格式化时间
 func Format(timeStr, format string) string {
 	timeLayout := "2006-01-02 15:04:05"
