@@ -22,8 +22,22 @@ func ParseE8TS(timeStr string) time.Time {
 }
 
 //转换成东八区时间
+func ParseE8Time(ts int64) time.Time {
+	var shZone, _ = time.LoadLocation("Asia/Shanghai") //上海
+	e8Time := time.Unix(ts, 0).In(shZone)
+	return e8Time
+}
+
+//转换成东八区时间
 func FormatE8(ts int64) string {
 	var shZone, _ = time.LoadLocation("Asia/Shanghai") //上海
 	e8TimeStr := time.Unix(ts, 0).In(shZone).Format("2006-01-02 15:04:05")
+	return e8TimeStr
+}
+
+//转换成东八区时间
+func FormatE8Date(ts int64) string {
+	var shZone, _ = time.LoadLocation("Asia/Shanghai") //上海
+	e8TimeStr := time.Unix(ts, 0).In(shZone).Format("2006-01-02")
 	return e8TimeStr
 }
