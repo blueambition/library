@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-//Post请求
+//Post请求 Form形式 username=jack&password=abc-123  req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 func Post(reqUrl string, proxy string, header map[string]string, data string) ([]byte, int, error) {
 	client := &http.Client{}
 	if proxy != "" {
