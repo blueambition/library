@@ -49,7 +49,7 @@ func IsDir(path string) bool {
 
 //获取文件扩展名(.txt)
 func GetExt(filePath string) string {
-	at := strings.LastIndex(filePath, ".")
+	at := str.LastIndex(filePath, ".")
 	if at > -1 {
 		strLen := str.Len(filePath)
 		ext := str.SubStr(filePath, at, strLen)
